@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: lending-decision-system
+
+  # PostgreSQL Transactional Database
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/lending}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  # MongoDB Audit Log Database
+  data:
+    mongodb:
+      uri: ${SPRING_MONGODB_URI:mongodb://localhost:27017/lending_audit}
+
+  # JPA & Hibernate Settings
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate # Flyway is the source of truth for migrations
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Flyway Migration Configuration
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  # Task Execution for Async Processing (Stage 5)
+  task:
+    execution:
+      pool:
+        core-size: 5
+        max-size: 10
+        queue-capacity: 25
+      thread-name-prefix: async-decision-

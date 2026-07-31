@@ -1,0 +1,77 @@
+# ==============================================================================
+# Global .gitignore for MSME Lending Decision System (Full-Stack)
+# Covers: Spring Boot (Java/Maven), React (Vite/Node), IDEs, and OS files
+# ==============================================================================
+
+# --- Java & Maven (Backend) ---
+target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+.mvn/wrapper/maven-wrapper.jar
+**/target/
+
+# --- Node & React (Frontend) ---
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.eslintcache
+.parcel-cache
+
+# --- IDEs & Editors ---
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse
+.settings/
+.classpath
+.project
+.factorypath
+.metadata/
+tmp/
+bin/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+.history/
+*.code-workspace
+
+# Sublimetext
+*.sublime-project
+*.sublime-workspace
+
+# --- Database & Local Containers ---
+# Ignore local database volume mounts or temporary files
+pgdata/
+mongodata/
+
+# --- OS Specific Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# --- Log Files ---
+*.log
+logs/
