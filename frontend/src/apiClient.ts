@@ -7,10 +7,26 @@ import {
   DecisionResponse
 } from './types';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+function getBaseUrl(): string {
+  const rawBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '';
+  const normalizedBaseUrl = rawBaseUrl
+    .trim()
+    .replace(/^VITE_API_BASE_URL=/i, '')
+    .replace(/\/+$/, '');
+
+  return normalizedBaseUrl;
+}
+
+const BASE_URL = getBaseUrl();
 
 async function request<T>(path: string, options?: RequestInit): Promise<ApiResponseEnvelope<T>> {
-  const url = `${BASE_URL}${path}`;
+  if (!BASE_URL) {
+    throw new Error(
+      'Missing VITE_API_BASE_URL. Set it to your backend Railway URL and redeploy the frontend.'
+    );
+  }
+
+  const url = new URL(path, `${BASE_URL}/`).toString();
   const headers = {
     'Content-Type': 'application/json',
     ...(options?.headers || {}),
